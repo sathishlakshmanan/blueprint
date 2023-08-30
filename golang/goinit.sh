@@ -1,15 +1,17 @@
 #! /bin/bash
 
 directory_name=$1
+DEFAULT_MAIN_GO='https://raw.githubusercontent.com/sathishlakshmanan/blueprint/main/golang/main.go'
 
 while getopts ":n" flag; do
     case $flag in
         n)
             # get the default main.go file
-            main_go='https://raw.githubusercontent.com/sathishlakshmanan/blueprint/main/golang/main.go'
-            curl -s "$main_go" -o main.go
+            curl -s "$DEFAULT_MAIN_GO" -o main.go
 
             echo "Created a default main.go file in the current directory"
+            echo -e "\n--- main.go ---"
+            cat main.go
             exit 0
             ;;
     esac
@@ -27,8 +29,7 @@ fi
 go mod init $directory_name
 
 # get the default main.go file
-main_go='https://raw.githubusercontent.com/sathishlakshmanan/blueprint/main/golang/main.go'
-curl -s "$main_go" -o main.go
+curl -s "$DEFAULT_MAIN_GO" -o main.go
 
 echo "Created a default main.go file in the current directory"
 
